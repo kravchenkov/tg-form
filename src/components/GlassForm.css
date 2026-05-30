@@ -1,0 +1,525 @@
+/* Container for form and background glow blobs */
+.glass-form-container {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  overflow: visible; /* allows background glow to spill out beautifully */
+}
+
+/* Background glowing blobs */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  z-index: -1;
+  pointer-events: none;
+  animation: float-blob 12s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(170, 59, 255, 0.35) 0%, rgba(170, 59, 255, 0) 70%);
+  top: -20px;
+  left: -40px;
+  animation-duration: 10s;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(6, 182, 212, 0) 70%);
+  bottom: -40px;
+  right: -50px;
+  animation-duration: 14s;
+  animation-delay: -2s;
+}
+
+.blob-3 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.25) 0%, rgba(249, 115, 22, 0) 70%);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-duration: 16s;
+  animation-delay: -5s;
+}
+
+@keyframes float-blob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(25px, -15px) scale(1.1);
+  }
+  100% {
+    transform: translate(-15px, 20px) scale(0.95);
+  }
+}
+
+/* Glass Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 
+    0 8px 32px 0 rgba(31, 38, 135, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 
+    0 12px 40px 0 rgba(31, 38, 135, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.glass-card-header {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 15px;
+}
+
+.glass-card-header h2 {
+  font-size: 28px;
+  margin: 0 0 6px;
+  background: linear-gradient(135deg, var(--text-h) 30%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-card-header p {
+  color: var(--text);
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Form layout grid */
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-row-2 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.form-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Glassmorphic input controls */
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text-h);
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* Focus and hover state for inputs */
+.form-group input:hover,
+.form-group textarea:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(170, 59, 255, 0.3);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: var(--accent);
+  box-shadow: 
+    0 0 0 4px rgba(170, 59, 255, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* Form Validation Styles */
+.form-group.has-error input,
+.form-group.has-error textarea {
+  border-color: rgba(239, 68, 68, 0.5);
+  background: rgba(254, 226, 226, 0.2);
+}
+
+.form-group.has-error input:focus,
+.form-group.has-error textarea:focus {
+  border-color: rgb(239, 68, 68);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.error-text {
+  font-size: 12px;
+  color: #e11d48;
+  margin-top: 6px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Buttons */
+.glass-btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--sans);
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.2);
+}
+
+/* Shimmer sun glint effect */
+.glass-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  animation: sun-glint 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-btn:disabled::after {
+  display: none;
+}
+
+@keyframes sun-glint {
+  0% {
+    left: -150%;
+  }
+  30%, 100% {
+    left: 150%;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, #8b2cf5 100%);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(170, 59, 255, 0.35);
+  background: linear-gradient(135deg, #b854ff 0%, #953dfc 100%);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner for loading submit states */
+.btn-spinner-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Card & Summary */
+.success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.success-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #10b981;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+}
+
+.success-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.success-card h2 {
+  font-size: 26px;
+  color: var(--text-h);
+  margin: 0 0 10px;
+}
+
+.success-message {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.submitted-data-summary {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  padding: 18px 24px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-row span {
+  color: var(--text);
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.summary-row strong {
+  color: var(--text-h);
+  text-align: right;
+  word-break: break-all;
+  padding-left: 15px;
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(26, 29, 39, 0.55);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-card:hover {
+    box-shadow: 
+      0 12px 40px 0 rgba(0, 0, 0, 0.4),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-header h2 {
+    background: linear-gradient(135deg, #ffffff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    background: rgba(0, 0, 0, 0.25);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #f3f4f6;
+  }
+
+  .form-group input:hover,
+  .form-group textarea:hover {
+    background: rgba(0, 0, 0, 0.35);
+    border-color: rgba(192, 132, 252, 0.3);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    background: rgba(0, 0, 0, 0.45);
+    border-color: var(--accent);
+    box-shadow: 
+      0 0 0 4px rgba(192, 132, 252, 0.2),
+      inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Form Validation Styles in Dark Mode */
+  .form-group.has-error input,
+  .form-group.has-error textarea {
+    border-color: rgba(239, 68, 68, 0.6);
+    background: rgba(239, 68, 68, 0.05);
+  }
+  
+  .error-text {
+    color: #f43f5e;
+  }
+
+  .submitted-data-summary {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .summary-row {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Telegram Status Banners */
+.telegram-status-banner {
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 25px;
+  text-align: left;
+  border: 1px solid transparent;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.telegram-status-banner strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.telegram-status-banner p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 13px;
+}
+
+.telegram-status-banner code {
+  font-size: 12px;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Banner Variations */
+.telegram-status-banner.warning {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #b45309;
+}
+
+.telegram-status-banner.success {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #047857;
+}
+
+.telegram-status-banner.error {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #b91c1c;
+}
+
+/* Dark mode banner variations */
+@media (prefers-color-scheme: dark) {
+  .telegram-status-banner.warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+  }
+  
+  .telegram-status-banner.warning code {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .telegram-status-banner.success {
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+  }
+
+  .telegram-status-banner.error {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+  }
+}
